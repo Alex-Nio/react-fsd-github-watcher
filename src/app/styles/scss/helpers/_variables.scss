@@ -1,0 +1,76 @@
+//? Основные цвета
+$main: #081111;
+$black: #0d1c1c;
+$white: #feffff;
+$primary: #599c98;
+$secondary: #626262;
+$additional: #e61414;
+// success
+$success-main: #60b221;
+$success-hover: #4f9b14;
+$success-active: #3d7710;
+$success-bg: #f3fbee;
+// warning
+$warning-main: #f2b30f;
+$warning-hover: #d18006;
+$warning-active: #af6a19;
+$warning-bg: #fff8eb;
+// error
+$error-main: #e31b1b;
+$error-hover: #c20d0d;
+$error-active: #810909;
+$error-bg: #fff2f2;
+// info
+$info-main: #0023dd;
+$info-hover: #001db8;
+$info-active: #001793;
+$info-bg: #ebeeff;
+
+//? Состояния
+//? Состояния текста
+//? Фоны
+$sidebar-nav-bg: #000102;
+//? Размер иконок
+$icon-fz32: 32px;
+$icon-fz24: 24px;
+$icon-fz20: 20px;
+$icon-fz16: 16px;
+
+//? Transitions
+$width-transition: width 0.2s linear, min-width 0.2s linear,
+  max-width 0.2s linear;
+
+//? Border-radius
+//? Z-index
+$header-z-index: 55;
+
+//? По умолчанию
+$base_fz: 16px; //? Размер шрифта по умолчанию 16px
+$base_ff: 'NunitoSans-Regular', sans-serif; //? Шрифт по умолчанию
+$base_bg: $main; //? Цвет фона по умолчанию
+$base_color: $white; //? Цвет текста по умолчанию
+
+//! Направление right-to-left или left-to-right
+// $web-direction: rtl;
+$web-direction: ltr;
+
+//? Переменные семейств шрифтов
+$ff_NSsb: 'NunitoSans-SemiBold', sans-serif;
+$ff_NSb: 'NunitoSans-Bold', sans-serif;
+$ff_NSr: 'NunitoSans-Regular', sans-serif;
+$ff_Dr: 'DaysOne-Regular', sans-serif;
+
+//? Стиль шрифтов
+$I: italic;
+$O: oblique;
+
+//? Толщина семейства шрифтов
+$th: 100; // Thin
+$el: 200; // Extra Light
+$l: 300; // Light
+$r: 400; // Regular
+$m: 500; // Medium
+$sb: 600; // SemiBold
+$b: 700; // Bold
+$eb: 800; // Extra Bold
+$bl: 900; // Super
