@@ -21,6 +21,8 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
   },
   "include": [
     "*.vue",
