@@ -30,6 +30,12 @@ npm install -D sass
 - Eslint
 - Prettier
 - Axios
+- React
+- React/toolkit
+- TypeScript
+- Scss
+- Feature sliced design
+- GraphQL
 
 #### Usage:
 
