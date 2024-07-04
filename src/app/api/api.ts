@@ -51,7 +51,7 @@ export async function fetchAllRepositories(query: string, count: number = 10) {
   }
 }
 
-export async function fetchUserRepositories(user: string) {
+export async function fetchUserRepositories() {
   const url = 'https://api.github.com/graphql';
 
   const accessToken = import.meta.env.VITE_GITHUB_API_ACCESS_TOKEN;
@@ -62,34 +62,30 @@ export async function fetchUserRepositories(user: string) {
 
   const graphqlQuery = `
     query {
-        search(query: "user:${user}", type: USER, first: 10) {
-            nodes {
-                ... on User {
-                    repositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
+        viewer {
+            repositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
+                nodes {
+                    id
+                    name
+                    url
+                    description
+                    stargazerCount
+                    pushedAt
+                    owner {
+                        login
+                        avatarUrl
+                        url
+                    }
+                    languages(first: 5) {
                         nodes {
-                            id
                             name
-                            url
-                            description
-                            stargazerCount
-                            pushedAt
-                            owner {
-                                login
-                                avatarUrl
-                                url
-                            }
-                            languages(first: 5) {
-                                nodes {
-                                    name
-                                }
-                            }
                         }
                     }
                 }
             }
         }
     }
-`;
+  `;
 
   try {
     const response = await axios.post(
@@ -98,7 +94,7 @@ export async function fetchUserRepositories(user: string) {
       { headers }
     );
 
-    return response.data.data.search.nodes[0].repositories.nodes;
+    return response.data.data.viewer.repositories.nodes;
   } catch (error) {
     console.error('Ошибка при выполнении запроса к GitHub API:', error);
     throw error;

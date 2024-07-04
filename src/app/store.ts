@@ -1,9 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  createAction,
-  createReducer,
-} from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
   FLUSH,
   PAUSE,
@@ -15,44 +10,25 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import repoReducer from 'app/reducers/repoReducer';
+import searchReducer from 'app/reducers/searchReducer';
 
-interface CartItem {
-  id: number;
-  name: string;
-  quantity: number;
-}
-
-type CartState = CartItem[];
-
-const addToCart = createAction<CartItem>('ADD_TO_CART');
-const removeFromCart = createAction<{ id: number }>('REMOVE_FROM_CART');
-
-const initialCartState: CartState = [];
-
-// Create a reducer using createReducer to handle actions
-const cartReducer = createReducer(initialCartState, (builder) => {
-  builder
-    .addCase(addToCart, (state, action) => {
-      state.push(action.payload);
-    })
-    .addCase(removeFromCart, (state, action) => {
-      return state.filter((item) => item.id !== action.payload.id);
-    });
-});
-
+// Комбинируем редьюсеры
 const rootReducer = combineReducers({
-  //TODO: add actions
-  cart: cartReducer,
+  repositories: repoReducer,
+  search: searchReducer,
 });
 
+// Конфигурация для redux-persist
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart'],
+  whitelist: ['repositories', 'search'], // сохраняем только состояние репозиториев
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Создаем стор с redux-persist
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -63,5 +39,10 @@ const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
-export default store;
+// Создаем persistor
+const persistor = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export { store, persistor };

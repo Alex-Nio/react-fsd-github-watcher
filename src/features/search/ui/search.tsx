@@ -1,58 +1,73 @@
-import { fetchAllRepositories, fetchUserRepositories } from 'app/api/api';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
+import {
+  fetchAllRepositories,
+  fetchUserRepositories,
+} from 'app/actions/repoActions';
+import { AppDispatch, RootState } from 'app/store';
+import { RepositoryItem } from 'entities/repository-item';
+import { IRepository } from 'shared/types';
+import { setRepositories } from 'app/actions/repoActions';
+import { setQuery } from 'app/actions/searchActions';
 
 import './search.scss';
 
-interface IRepository {
-  id: string;
-  url: string;
-  name: string;
-  description: string;
-  pushedAt: string;
-  stargazerCount: number;
-}
-
 export const Search = () => {
-  const [query, setQuery] = useState('');
-  const [repositories, setRepositories] = useState<IRepository[]>([]);
+  const dispatch: AppDispatch = useDispatch();
+  const repositories = useSelector((state: RootState) => state.repositories);
+  const searchQuery = useSelector((state: RootState) => state.search.query);
 
+  const [query, setLocalQuery] = useState(searchQuery);
+
+  // Загрузка репозиториев текущего пользователя при монтировании компонента
   useEffect(() => {
-    async function loadRepositories() {
+    const fetchUserRepos = async () => {
       try {
-        const fetchedRepositories = await fetchUserRepositories('Alex-Nio');
-
-        setRepositories(fetchedRepositories);
+        const fetchedRepositories = await dispatch(fetchUserRepositories());
+        dispatch(setRepositories(fetchedRepositories));
       } catch (error) {
-        console.error('Ошибка при загрузке репозиториев:', error);
+        console.error('Ошибка при загрузке репозиториев пользователя:', error);
       }
-    }
+    };
 
-    loadRepositories();
-  }, []);
+    fetchUserRepos();
+  }, [dispatch]);
 
-  async function searchRepositories(query: string) {
+  // Обработчик изменения текста в поле поиска
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalQuery(e.target.value);
+  };
+
+  // Обработчик отправки формы поиска
+  const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(setQuery(query));
+
     try {
-      const fetchedRepositories = await fetchAllRepositories(query);
-      setRepositories(fetchedRepositories);
+      let fetchedRepositories: IRepository[];
+
+      if (query.trim() === '') {
+        // Если запрос пустой, показываем репозитории текущего пользователя
+        fetchedRepositories = await dispatch(fetchUserRepositories());
+      } else {
+        // Иначе выполняем поиск среди всех репозиториев GitHub
+        fetchedRepositories = await dispatch(fetchAllRepositories(query));
+      }
+
+      dispatch(setRepositories(fetchedRepositories));
     } catch (error) {
-      console.error('Ошибка при поиске репозиториев:', error);
+      console.error('Ошибка при выполнении поиска:', error);
     }
-  }
+  };
 
   return (
     <div>
-      <form
-        className="search-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          searchRepositories(query);
-        }}
-      >
+      <form className="search-form" onSubmit={handleSearchSubmit}>
         <input
           className="search-input"
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleSearchChange}
           placeholder="Поиск репозиториев"
         />
         <button type="submit" className="search-btn">
@@ -61,9 +76,9 @@ export const Search = () => {
       </form>
 
       <ul className="repository-list">
-        {repositories.map((repo) => (
+        {repositories.map((repo: IRepository) => (
           <li key={repo.id} className="repository-list__item repository-item">
-            <span className="repository-item__name">{repo.name}</span>
+            <RepositoryItem repo={repo} />
             {repo.description && (
               <span className="repository-item__description">
                 {repo.description}
@@ -82,7 +97,8 @@ export const Search = () => {
               rel="noopener noreferrer"
               className="repository-item__link"
             >
-              URL: {repo.url}
+              <span>URL: </span>
+              <span>{repo.url}</span>
             </a>
           </li>
         ))}

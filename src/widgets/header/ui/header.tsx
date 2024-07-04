@@ -5,18 +5,6 @@ import { NavLink } from 'react-router-dom';
 import './header.scss';
 
 export const Header = () => {
-  // const navigationContent = MENU_ITEMS.map((item) => (
-  //   <li key={item.title} className="navigation-menu-item">
-  //     <NavLink
-  //       to={item.link}
-  //       end
-  //       className={({ isActive }) => (isActive ? 'active' : '')}
-  //     >
-  //       {item.title}
-  //     </NavLink>
-  //   </li>
-  // ));
-
   return (
     <header className="header">
       <div className="header__content">
@@ -39,14 +27,6 @@ export const Header = () => {
                   className={({ isActive }) => (isActive ? 'active' : '')}
                 >
                   UI
-                </NavLink>
-              </li>
-              <li className="navbar-list__item">
-                <NavLink
-                  to="/:repoId"
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                >
-                  Details
                 </NavLink>
               </li>
             </ul>

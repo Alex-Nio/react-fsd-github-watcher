@@ -1,4 +1,5 @@
 @import 'styles/helpers/variables';
+@import 'styles/helpers/mixins';
 @import 'styles/config/fonts/typography';
 
 .search-form {
@@ -59,30 +60,45 @@
   }
 
   // .repository-item__description
-
   &__description {
     color: $black;
     @include nunito-r24;
   }
 
   // .repository-item__commit
-
   &__commit {
     color: $black;
     @include nunito-r24;
   }
 
   // .repository-item__rated
-
   &__rated {
     color: $black;
     @include nunito-r24;
   }
 
   // .repository-item__link
-
   &__link {
-    color: $black;
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    gap: 16px;
     @include nunito-r24;
+
+    & span {
+      &:last-child {
+        color: $info-main;
+        @include defaultTransition;
+
+        &:hover {
+          color: $info-active;
+          @include defaultTransition;
+        }
+      }
+    }
   }
+}
+
+.paginator {
+  background-color: red;
 }
