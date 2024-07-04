@@ -54,15 +54,18 @@ npx eslint "src/**/*.js"
 
 ## Additional Information:
 
-[ESLint documentation](https://eslint.org/docs/user-guide/getting-started)
-[FEATURE SLICED DESIGN official](https://feature-sliced.design)
+- [ESLint documentation](https://eslint.org/docs/user-guide/getting-started)
+
+- [FEATURE SLICED DESIGN official](https://feature-sliced.design)
 
 
 #### GitHub API articles:
 
-[Getting Started GraphQL](https://www.robinwieruch.de/getting-started-github-graphql-api/)
-[GraphQL Request vol.1](https://habr.com/ru/articles/569556/)
-[GraphQL Request vol.2](https://habr.com/ru/articles/569560/)
+- [Getting Started GraphQL](https://www.robinwieruch.de/getting-started-github-graphql-api/)
+
+- [GraphQL Request vol.1](https://habr.com/ru/articles/569556/)
+
+- [GraphQL Request vol.2](https://habr.com/ru/articles/569560/)
 
 ## Helpers:
 
