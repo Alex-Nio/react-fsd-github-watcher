@@ -60,6 +60,7 @@ export const Search = () => {
     }
   };
 
+  // TODO: decomposition
   return (
     <div>
       <form className="search-form" onSubmit={handleSearchSubmit}>

@@ -17,16 +17,10 @@ export const Details: React.FC = () => {
 
   return (
     <div className="details">
-      <h4>{repoDetails.name}</h4>
-      <p>Stars: {repoDetails.stargazerCount}</p>
-      <p>Last Commit: {new Date(repoDetails.pushedAt).toLocaleDateString()}</p>
-      <div className="owner">
-        {repoDetails.owner.avatarUrl && (
-          <img
-            src={repoDetails.owner.avatarUrl}
-            alt={`${repoDetails.owner.login} avatar`}
-          />
-        )}
+      <div className="details__title">
+        <h4>{repoDetails.name}</h4>
+      </div>
+      <div className="url">
         <a
           href={repoDetails.owner.url}
           target="_blank"
@@ -35,15 +29,36 @@ export const Details: React.FC = () => {
           {repoDetails.owner.login}
         </a>
       </div>
+      <div className="details-content">
+        <div className="owner">
+          {repoDetails.owner.avatarUrl && (
+            <div className="owner__avatar">
+              <img
+                src={repoDetails.owner.avatarUrl}
+                alt={`${repoDetails.owner.login} avatar`}
+              />
+            </div>
+          )}
+        </div>
+        <div className="details-content__info">
+          <p>Stars: {repoDetails.stargazerCount}</p>
+          <p>
+            Last Commit: {new Date(repoDetails.pushedAt).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+
       <div className="languages">
-        <h5>Languages</h5>
+        <h5>Languages:</h5>
         <ul>
           {repoDetails.languages.nodes.map((language: Language) => (
             <li key={language.name}>{language.name}</li>
           ))}
         </ul>
       </div>
-      <p>{repoDetails.description}</p>
+      <div className="description">
+        <p>{repoDetails.description}</p>
+      </div>
     </div>
   );
 };

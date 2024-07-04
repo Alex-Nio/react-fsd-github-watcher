@@ -31,7 +31,8 @@ npm install -D sass
 - Prettier
 - Axios
 - React
-- React/toolkit
+- Redux
+- Redux/toolkit
 - TypeScript
 - Scss
 - Feature sliced design

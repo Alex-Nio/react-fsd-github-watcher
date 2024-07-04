@@ -1,8 +1,84 @@
 @import 'styles/helpers/variables';
 @import 'styles/config/fonts/typography';
 
-h4 {
-  text-align: center;
-  font-size: 68px;
-  @include do-upper58;
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: $info-bg;
+  color: $black;
+
+  // .details__info
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // .details__title
+  &__title {
+    color: $additional;
+    margin: 36px 0;
+    @include do-upper58;
+  }
+}
+
+.details-content {
+  display: flex;
+  gap: 24px;
+
+  // .details-content__info
+  &__info {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 16px;
+    @include nunito-r24;
+  }
+}
+
+.owner {
+  // .owner__avatar
+  &__avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
+.languages {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-family: $ff_NSsb;
+  font-size: 24px;
+  line-height: 130%;
+
+  h5 {
+    color: $additional;
+    @include heading-h1;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.description {
+  font-family: $ff_NSsb;
+  font-size: 34px;
+  line-height: 130%;
+  margin: 20px 0;
+  max-width: 720px;
+}
+
+.url {
+  color: $info-main;
+  text-decoration: underline;
+  @include do-upper48;
 }
