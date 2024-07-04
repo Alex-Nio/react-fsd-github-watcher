@@ -1,4 +1,10 @@
 # GitHub WaTcher
+
+Takes a list of info about repositories from GitHub Api
+
+___
+
+![Preview](preview.png)
 ___
 
 ## About
