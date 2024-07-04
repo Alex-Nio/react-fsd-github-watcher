@@ -1,0 +1,25 @@
+@import 'styles/helpers/variables';
+@import 'styles/config/fonts/typography';
+
+.ui-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 60px;
+  z-index: 0;
+}
+
+.glyph {
+  margin: 12px 0;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: $ff_NSr;
+    font-size: 32px;
+
+    & span:first-child {
+      font-size: 52px;
+    }
+  }
+}

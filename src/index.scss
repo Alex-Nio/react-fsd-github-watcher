@@ -1,8 +1,13 @@
-// -----------------------------------------------
-// --------------MAIN SETTINGS--------------------
-// -----------------------------------------------
-
-@import './imports.scss';
+@use 'sass:math';
+@import 'styles/utils/reset.scss';
+@import 'styles/helpers/variables.scss';
+@import 'styles/utils/animations.scss';
+@import 'styles/helpers/mixins.scss';
+@import 'styles/config/grid/breakpoints.scss';
+@import 'styles/config/grid/container.scss';
+@import 'styles/config/grid/grid.scss';
+@import 'styles/config/fonts/iconfont.scss';
+@import 'styles/config/fonts/typography.scss';
 
 * {
   box-sizing: border-box;
@@ -44,7 +49,7 @@ body {
   position: relative;
   font-size: $base_fz;
   font-family: $base_ff;
-  font-style: normal;
+  font-style: inherit;
   color: $base_color;
   background: $base_bg;
   overflow-x: hidden;
@@ -133,6 +138,13 @@ textarea {
   }
 }
 
+.content {
+  // .content__inner
+  &__inner {
+    margin: 120px 0;
+  }
+}
+
 // ------------------------------------------------
 // -------------------Buttons----------------------
 // ------------------------------------------------
@@ -149,11 +161,3 @@ button {
   justify-content: center;
   align-items: center;
 }
-
-// ------------------------------------------------
-// -------------------Reused-----------------------
-// ------------------------------------------------
-
-// ------------------------------------------------
-// -----------------KEYFRAMES----------------------
-// ------------------------------------------------

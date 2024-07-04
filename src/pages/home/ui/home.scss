@@ -1,0 +1,7 @@
+@import 'styles/helpers/variables';
+@import 'styles/config/fonts/typography';
+
+h4 {
+  text-align: center;
+  @include do-upper58;
+}

@@ -1,23 +1,51 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { publicRoutes, privateRoutes } from './routes';
+import {
+  Route,
+  Link,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
+import { Details } from 'pages/details';
+import { Home } from 'pages/home';
+import { Layout } from 'app/layout';
+import { UiPage } from 'pages/ui-page';
 
-interface AppRoute {
-  path: string;
-  element: React.ReactNode;
+//* Redirect
+/* <Route path="*" element={<Navigate to="/posts" replace />} /> */
+
+interface IParamsDynamicPath {
+  pathname: string;
+  params?: { categoryId: string; bookId: string };
 }
 
-const AppRouter: React.FC = () => {
-  return (
-    <Routes>
-      {privateRoutes.map((route: AppRoute) => (
-        <Route key={route.path} path={route.path} element={route.element} />
-      ))}
-      {publicRoutes.map((route: AppRoute) => (
-        <Route key={route.path} path={route.path} element={route.element} />
-      ))}
-    </Routes>
-  );
-};
+export const AppRouter = () => {
+  const getDynamicPathForRepo = ({
+    pathname,
+    params,
+  }: IParamsDynamicPath): JSX.Element => {
+    return <Link to={pathname}></Link>;
+  };
 
-export default AppRouter;
+  const routers = createRoutesFromElements(
+    <Route
+      path="/"
+      element={<Layout />}
+      handle={{ crumb: <Link to="/">Home</Link> }}
+    >
+      <Route index element={<Home />} />
+      <Route path="/ui-page" element={<UiPage />} />
+      <Route
+        path=":repoId"
+        element={<Details />}
+        handle={{
+          crumb: getDynamicPathForRepo,
+        }}
+      />
+    </Route>
+  );
+
+  const router = createBrowserRouter(routers, {});
+
+  return <RouterProvider router={router} />;
+};
