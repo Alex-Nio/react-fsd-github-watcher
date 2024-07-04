@@ -1,12 +1,9 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 export async function fetchAllRepositories(query: string, count: number = 10) {
   const url = 'https://api.github.com/graphql';
 
-  const accessToken = process.env.GITHUB_API_ACCESS_TOKEN;
+  const accessToken = import.meta.env.VITE_GITHUB_API_ACCESS_TOKEN;
 
   const headers = {
     Authorization: `Bearer ${accessToken}`,
@@ -57,7 +54,7 @@ export async function fetchAllRepositories(query: string, count: number = 10) {
 export async function fetchUserRepositories(user: string) {
   const url = 'https://api.github.com/graphql';
 
-  const accessToken = process.env.GITHUB_API_ACCESS_TOKEN;
+  const accessToken = import.meta.env.VITE_GITHUB_API_ACCESS_TOKEN;
 
   const headers = {
     Authorization: `Bearer ${accessToken}`,

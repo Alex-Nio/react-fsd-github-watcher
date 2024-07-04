@@ -21,8 +21,6 @@ export const Search = () => {
       try {
         const fetchedRepositories = await fetchUserRepositories('Alex-Nio');
 
-        console.log(fetchedRepositories[0]);
-
         setRepositories(fetchedRepositories);
       } catch (error) {
         console.error('Ошибка при загрузке репозиториев:', error);
